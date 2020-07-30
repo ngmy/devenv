@@ -45,6 +45,7 @@ install_terminal_settings_for_wsl2() {
 
 install_mt_settings() {
   # TODO
+  :
 }
 
 install_wt_settings() {
