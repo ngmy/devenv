@@ -53,6 +53,21 @@ install_wt_settings() {
   bash <(curl -LSs https://raw.githubusercontent.com/ngmy/wt-settings/master/install.sh) "${WT_SETTINGS_PATH}"
 }
 
+install_homebrew() {
+  # Install the Homebrew package manager
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  sudo apt-get install build-essential
+  source "${HOME}/.bash_profile"
+
+  # Install Homebrew packages
+  brew bundle --global
+
+  # Install the GCM4ML
+  git-credential-manager install
+  # Restore the side effect of the "install" command
+  git -C "$(dirname "$(readlink "${HOME}/.gitconfig")")" checkout "$(readlink "${HOME}/.gitconfig")"
+}
+
 execute_tasks() {
   local TASKS=("$@")
   local task
@@ -66,11 +81,13 @@ main() {
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_mac'
+    'install_homebrew'
   )
   local WSL2_TASKS=(
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_wsl2'
+    'install_homebrew'
   )
 
   if is_mac; then
