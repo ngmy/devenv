@@ -56,12 +56,12 @@ install_wt_settings() {
 install_homebrew() {
   # Install the Homebrew package manager
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  sudo apt-get update
-  sudo apt-get install build-essential
+  sudo apt-get -V update
+  sudo apt-get -V install build-essential
   source "${HOME}/.bash_profile"
 
   # Install Homebrew packages
-  brew bundle --global
+  brew bundle --global -v
 
   # Install the GCM4ML
   git-credential-manager install
