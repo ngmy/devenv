@@ -41,6 +41,15 @@ install_terminal_settings_for_wsl2() {
   if is_wt; then
     install_wt_settings
   fi
+
+  # Install the genie
+  wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+  sudo dpkg -i packages-microsoft-prod.deb
+  sudo apt-get update
+  sudo apt-get install -yV dotnet-runtime-3.1
+  curl -s https://packagecloud.io/install/repositories/arkane-systems/wsl-translinux/script.deb.sh | sudo bash
+  sudo apt install -y systemd-genie
+  genie -s
 }
 
 install_mt_settings() {
