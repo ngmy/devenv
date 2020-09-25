@@ -42,14 +42,10 @@ install_terminal_settings_for_wsl2() {
     install_wt_settings
   fi
 
-  # Install the genie
-  wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-  sudo dpkg -i packages-microsoft-prod.deb
-  sudo apt-get update
-  sudo apt-get install -yV dotnet-runtime-3.1
-  curl -s https://packagecloud.io/install/repositories/arkane-systems/wsl-translinux/script.deb.sh | sudo bash
-  sudo apt install -y systemd-genie
-  genie -s
+  # HACK: Synchronize the system clock with Windows
+  #       https://github.com/microsoft/WSL/issues/4245
+  (sudo crontab -l ; echo "* * * * * hwclock --hctosys") | sort - | uniq - | sudo crontab -
+  sudo service cron start
 }
 
 install_mt_settings() {
