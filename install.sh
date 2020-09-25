@@ -68,11 +68,6 @@ install_homebrew() {
 
   # Install Homebrew packages
   brew bundle --global -v
-
-  # Install the GCM4ML
-  git-credential-manager install
-  # Restore the side effect of the "install" command
-  git -C "$(dirname "$(readlink "${HOME}/.gitconfig")")" checkout "$(readlink "${HOME}/.gitconfig")"
 }
 
 execute_tasks() {
