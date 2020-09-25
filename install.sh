@@ -44,7 +44,7 @@ install_terminal_settings_for_wsl2() {
 
   # HACK: Synchronize the system clock with Windows
   #       https://github.com/microsoft/WSL/issues/4245
-  (sudo crontab -l 2>/dev/null ; echo "* * * * * hwclock --hctosys") | sort - | uniq - | sudo crontab -
+  ((sudo crontab -l 2>/dev/null || echo -n "") ; echo "* * * * * hwclock --hctosys") | sort | uniq | sudo crontab -
   sudo service cron start
 }
 
