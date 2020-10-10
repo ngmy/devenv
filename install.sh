@@ -62,8 +62,6 @@ install_homebrew() {
   # Install the Homebrew package manager
   sudo -K
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-  sudo apt-get update
-  sudo apt-get -V install build-essential
   source "${HOME}/.bash_profile"
 
   # Install Homebrew packages
