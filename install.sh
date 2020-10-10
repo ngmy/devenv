@@ -70,6 +70,10 @@ install_homebrew() {
   brew bundle --global -v
 }
 
+restart_shell() {
+  exec -l "${SHELL}"
+}
+
 execute_tasks() {
   local TASKS=("$@")
   local task
@@ -84,12 +88,14 @@ main() {
     'install_dotfiles'
     'install_terminal_settings_for_mac'
     'install_homebrew'
+    'restart_shell'
   )
   local WSL2_TASKS=(
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_wsl2'
     'install_homebrew'
+    'restart_shell'
   )
 
   if is_mac; then
