@@ -68,6 +68,11 @@ install_homebrew() {
 
   # Install Homebrew packages
   brew bundle --global -v
+
+  # Set up the nodebrew and install the Node.js
+  nodebrew setup
+  nodebrew install stable
+  nodebrew use stable
 }
 
 restart_shell() {
