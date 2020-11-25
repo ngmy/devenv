@@ -70,6 +70,9 @@ install_homebrew() {
   # Install Homebrew packages
   brew bundle --global -v
 
+  # Create symbolic links to use java command to run the GCM4ML
+  brew link openjdk --force
+
   # Set up the nodebrew and install the Node.js
   nodebrew setup
   nodebrew install stable
