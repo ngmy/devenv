@@ -59,17 +59,23 @@ install_wt_settings() {
   bash <(curl -LSs https://raw.githubusercontent.com/ngmy/wt-settings/master/install.sh) "${WT_SETTINGS_PATH}"
 }
 
-install_homebrew() {
-  # Install the Homebrew package manager
-  sudo -K
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+install_apt_packages() {
   sudo apt update
+
+  # Install the build-essential package, which is required to install Homebrew
   sudo apt -Vy install build-essential
-  source "${HOME}/.bash_profile"
 
   # Upgrade Vim
   sudo add-apt-repository -y ppa:jonathonf/vim
   sudo apt -Vy upgrade vim
+}
+
+install_homebrew_packages() {
+  # Install the Homebrew package manager
+  # Remove the sudo credential cache to install Homebrew into the home directory
+  sudo -K
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  source "${HOME}/.bash_profile"
 
   # Install Homebrew packages
   brew bundle --global -v
@@ -100,14 +106,15 @@ main() {
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_mac'
-    'install_homebrew'
+    'install_homebrew_packages'
     'restart_shell'
   )
   local WSL2_TASKS=(
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_wsl2'
-    'install_homebrew'
+    'install_apt_packages'
+    'install_homebrew_packages'
     'restart_shell'
   )
 
