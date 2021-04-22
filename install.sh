@@ -67,6 +67,10 @@ install_homebrew() {
   sudo apt -Vy install build-essential
   source "${HOME}/.bash_profile"
 
+  # Upgrade Vim
+  sudo add-apt-repository -y ppa:jonathonf/vim
+  sudo apt -Vy upgrade vim
+
   # Install Homebrew packages
   brew bundle --global -v
 
