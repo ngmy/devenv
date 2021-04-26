@@ -11,7 +11,7 @@ is_linux() {
 }
 
 is_wsl2() {
-  [ is_linux -a -d '/mnt/c' ]
+  [[ "$(uname -r)" =~ 'microsoft' ]]
 }
 
 is_mt() {
