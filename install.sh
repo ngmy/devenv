@@ -23,13 +23,13 @@ is_wt() {
 }
 
 install_homedir() {
-  local HOMEDIR_PATH="$(realpath "${HOME}/homedir")"
-  bash <(curl -LSs https://raw.githubusercontent.com/ngmy/homedir/master/install.sh) "${HOMEDIR_PATH}"
+  local -r homedir_path="$(realpath "${HOME}/homedir")"
+  bash <(curl -LSs https://raw.githubusercontent.com/ngmy/homedir/master/install.sh) "${homedir_path}"
 }
 
 install_dotfiles() {
-  local DOTFILES_PATH="$(realpath "${HOME}/share/dotfiles")"
-  bash <(curl -LSs https://raw.githubusercontent.com/ngmy/dotfiles/master/install.sh) "${DOTFILES_PATH}"
+  local -r dotfiles_path="$(realpath "${HOME}/share/dotfiles")"
+  bash <(curl -LSs https://raw.githubusercontent.com/ngmy/dotfiles/master/install.sh) "${dotfiles_path}"
 }
 
 install_terminal_settings_for_mac() {
@@ -55,8 +55,8 @@ install_mt_settings() {
 }
 
 install_wt_settings() {
-  local WT_SETTINGS_PATH="$(realpath "${HOME}/tmp/wt-settings")"
-  bash <(curl -LSs https://raw.githubusercontent.com/ngmy/wt-settings/master/install.sh) "${WT_SETTINGS_PATH}"
+  local -r wt_settings_path="$(realpath "${HOME}/tmp/wt-settings")"
+  bash <(curl -LSs https://raw.githubusercontent.com/ngmy/wt-settings/master/install.sh) "${wt_settings_path}"
 }
 
 install_apt_packages() {
@@ -94,22 +94,22 @@ restart_shell() {
 }
 
 execute_tasks() {
-  local TASKS=("$@")
+  local -r tasks=("$@")
   local task
-  for task in "${TASKS[@]}"; do
+  for task in "${tasks[@]}"; do
     eval "${task}"
   done
 }
 
 main() {
-  local MAC_TASKS=(
+  local -r mac_tasks=(
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_mac'
     'install_homebrew_packages'
     'restart_shell'
   )
-  local WSL2_TASKS=(
+  local -r wsl2_tasks=(
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_wsl2'
@@ -119,9 +119,9 @@ main() {
   )
 
   if is_mac; then
-    execute_tasks "${MAC_TASKS[@]}"
+    execute_tasks "${mac_tasks[@]}"
   elif is_wsl2; then
-    execute_tasks "${WSL2_TASKS[@]}"
+    execute_tasks "${wsl2_tasks[@]}"
   else
     echo "Your platform ($(uname -a)) is not supported."
     exit 1
