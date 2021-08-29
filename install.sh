@@ -89,6 +89,16 @@ install_homebrew_packages() {
   nodebrew use stable
 }
 
+install_archived_packages_for_wsl2() {
+  # Install ngrok
+  curl -O --output-dir "${HOME}/tmp" https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.tgz
+  tar zxvf "${HOME}/tmp/ngrok-stable-linux-arm64.tgz" -C "${HOME}/bin"
+  rm "${HOME}/tmp/ngrok-stable-linux-arm64.tgz"
+  local ngrok_auth_token
+  read -p 'Enter your ngrok auth token. (see: https://dashboard.ngrok.com/get-started/your-authtoken)' ngrok_auth_token
+  ngrok authtoken "${ngrok_auth_token}"
+}
+
 restart_shell() {
   exec -l "${SHELL}"
 }
@@ -115,6 +125,7 @@ main() {
     'install_terminal_settings_for_wsl2'
     'install_apt_packages'
     'install_homebrew_packages'
+    'install_archived_packages_for_wsl2'
     'restart_shell'
   )
 
