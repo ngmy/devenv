@@ -68,6 +68,11 @@ install_apt_packages() {
   # Upgrade Vim
   sudo add-apt-repository -y ppa:jonathonf/vim
   sudo apt -Vy upgrade vim
+
+  # Install Git Credential Manager Core
+  curl -sSL https://packages.microsoft.com/config/ubuntu/21.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
+  curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+  sudo apt -Vy install gcmcore
 }
 
 install_homebrew_packages() {
@@ -79,9 +84,6 @@ install_homebrew_packages() {
 
   # Install Homebrew packages
   brew bundle --global -v
-
-  # Create symbolic links to use java command to run the GCM4ML
-  brew link openjdk --force
 
   # Set up the nodebrew and install the Node.js
   nodebrew setup
