@@ -96,7 +96,7 @@ install_homebrew_packages() {
 
 install_archived_packages_for_wsl2() {
   # Install ngrok
-  curl -O --output-dir "${HOME}/tmp" https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.tgz
+  curl -OfsSL --output-dir "${HOME}/tmp" https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm64.tgz
   tar zxvf "${HOME}/tmp/ngrok-stable-linux-arm64.tgz" -C "${HOME}/bin"
   rm "${HOME}/tmp/ngrok-stable-linux-arm64.tgz"
   local ngrok_auth_token
