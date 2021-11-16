@@ -76,6 +76,10 @@ install_apt_packages() {
   curl -fsSL https://packages.microsoft.com/config/ubuntu/21.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
   curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
   sudo apt -Vy upgrade gcmcore
+  # HACK: https://github.com/microsoft/Git-Credential-Manager-Core/issues/528
+  curl -OfsSL --output-dir "${HOME}/tmp/" https://github.com/microsoft/Git-Credential-Manager-Core/releases/download/v2.0.567/gcmcore-linux_amd64.2.0.567.18224.tar.gz
+  sudo tar zxvf "${HOME}/tmp/gcmcore-linux_amd64.2.0.567.18224.tar.gz" -C /usr/local/share/gcm-core libHarfBuzzSharp.so libSkiaSharp.so
+  rm "${HOME}/tmp/gcmcore-linux_amd64.2.0.567.18224.tar.gz"
 }
 
 install_homebrew_packages() {
