@@ -69,10 +69,13 @@ install_apt_packages() {
   sudo add-apt-repository -y ppa:jonathonf/vim
   sudo apt -Vy upgrade vim
 
-  # Install Git Credential Manager Core
-  curl -sSL https://packages.microsoft.com/config/ubuntu/21.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
-  curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
-  sudo apt -Vy install gcmcore
+  # Install and upgrade Git Credential Manager Core
+  curl -OfsSL --output-dir "${HOME}/tmp" https://github.com/microsoft/Git-Credential-Manager-Core/releases/download/v2.0.567/gcmcore-linux_amd64.2.0.567.18224.deb
+  sudo dpkg -i "${HOME}/tmp/gcmcore-linux_amd64.2.0.567.18224.deb"
+  rm "${HOME}/tmp/gcmcore-linux_amd64.2.0.567.18224.deb"
+  curl -fsSL https://packages.microsoft.com/config/ubuntu/21.04/prod.list | sudo tee /etc/apt/sources.list.d/microsoft-prod.list
+  curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+  sudo apt -Vy upgrade gcmcore
 }
 
 install_homebrew_packages() {
