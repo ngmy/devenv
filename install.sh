@@ -22,6 +22,13 @@ is_wt() {
   [ -n "${WT_SESSION}" ]
 }
 
+setup_dns() {
+  sudo sh -c "echo '[network]' > /etc/wsl.conf"
+  sudo sh -c "echo 'generateResolvConf = false' >> /etc/wsl.conf"
+  sudo rm /etc/resolv.conf
+  sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
+}
+
 install_homedir() {
   local -r homedir_path="$(realpath "${HOME}/homedir")"
   bash <(curl -LSs https://raw.githubusercontent.com/ngmy/homedir/master/install.sh) "${homedir_path}"
@@ -171,6 +178,7 @@ main() {
     'restart_shell'
   )
   local -r wsl2_tasks=(
+    'setup_dns'
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_wsl2'
