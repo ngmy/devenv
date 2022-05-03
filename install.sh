@@ -27,6 +27,7 @@ setup_dns() {
   sudo sh -c "echo 'generateResolvConf = false' >> /etc/wsl.conf"
   sudo rm /etc/resolv.conf
   sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"
+  sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf"
 }
 
 install_homedir() {
