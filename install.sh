@@ -162,6 +162,12 @@ install_archived_packages_for_wsl2() {
   ngrok authtoken "${ngrok_auth_token}"
 }
 
+install_vim_plugins() {
+  vim +PlugInstall +qall
+  vim '+CocInstall -sync coc-phpls coc-diagnostic coc-tsserver coc-html coc-css coc-vetur' +qall
+  vim '+Copilot setup' +qall
+}
+
 restart_shell() {
   exec -l "${SHELL}"
 }
@@ -180,6 +186,7 @@ main() {
     'install_dotfiles'
     'install_terminal_settings_for_mac'
     'install_homebrew_packages'
+    'install_vim_plugins'
     'restart_shell'
   )
   local -r wsl2_tasks=(
@@ -190,6 +197,7 @@ main() {
     'install_homebrew_packages'
     'install_apt_packages'
     'install_archived_packages_for_wsl2'
+    'install_vim_plugins'
     'restart_shell'
   )
 
