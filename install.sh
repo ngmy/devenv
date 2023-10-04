@@ -72,9 +72,6 @@ install_wt_settings() {
 install_apt_packages() {
   sudo apt update
 
-  # Install the build-essential package, which is required to install Homebrew
-  sudo apt -Vy install build-essential
-
   # Install the necessary dependencies for pwa-asset-generator
   # see: https://github.com/onderceylan/pwa-asset-generator/issues/631
   # see: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#chrome-headless-doesnt-launch-on-unix
@@ -135,6 +132,11 @@ install_apt_packages() {
 }
 
 install_homebrew_packages() {
+  sudo apt update
+
+  # Install the build-essential package, which is required to install Homebrew
+  sudo apt -Vy install build-essential
+
   # Install the Homebrew package manager
   # Remove the sudo credential cache to install Homebrew into the home directory
   sudo -K
@@ -185,8 +187,8 @@ main() {
     'install_homedir'
     'install_dotfiles'
     'install_terminal_settings_for_wsl2'
-    'install_apt_packages'
     'install_homebrew_packages'
+    'install_apt_packages'
     'install_archived_packages_for_wsl2'
     'restart_shell'
   )
