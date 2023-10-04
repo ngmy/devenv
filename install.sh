@@ -48,9 +48,10 @@ install_terminal_settings_for_mac() {
 }
 
 install_terminal_settings_for_wsl2() {
-  if is_wt; then
-    install_wt_settings
-  fi
+  # TODO: The WT_SESSION environment variable used to detect Windows Terminal has been deleted
+  # if is_wt; then
+  #   install_wt_settings
+  # fi
 
   # HACK: Synchronize the system clock with Windows
   #       https://github.com/microsoft/WSL/issues/4245
