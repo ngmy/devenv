@@ -129,6 +129,11 @@ install_apt_packages() {
   curl -OfsSL --output-dir "${HOME}/tmp/" https://github.com/microsoft/Git-Credential-Manager-Core/releases/download/v2.0.567/gcmcore-linux_amd64.2.0.567.18224.tar.gz
   sudo tar zxvf "${HOME}/tmp/gcmcore-linux_amd64.2.0.567.18224.tar.gz" -C /usr/local/share/gcm-core libHarfBuzzSharp.so libSkiaSharp.so
   rm "${HOME}/tmp/gcmcore-linux_amd64.2.0.567.18224.tar.gz"
+
+  # Install the gcloud CLI
+  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+  echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main' | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+  sudo apt -Vy install google-cloud-cli
 }
 
 install_homebrew_packages() {
