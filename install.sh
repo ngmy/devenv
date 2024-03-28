@@ -137,6 +137,9 @@ install_apt_packages() {
 
   # Install the Git Large File Storage
   sudo apt -Vy install git-lfs
+
+  # Install the Ctags
+  sudo apt -Vy install ctags
 }
 
 install_homebrew_packages() {
